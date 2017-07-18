@@ -1,5 +1,7 @@
 # Create ESRI React App
 
+This project is creating ESRI React aplication by using **create-react-app**  and **esri-loader** npm module to add the ArcGIS JS API.
+
 ### How to install Create ESRI React App 
 To install Create ESRI React App application run
 ```$xslt
