@@ -1,0 +1,41 @@
+{
+  "name": "create-esri-react-app",
+  "version": "0.0.2",
+  "description": "Creating ESRI applications with React included",
+  "main": "./src/index.js",
+  "bin": {
+    "create-esri-react-app": "build/index.js"
+  },
+  "scripts": {
+    "build": "babel src -d build",
+    "prepublish": "npm run build",
+    "release": "np"
+  },
+  "babel": {
+    "presets": [
+      "latest"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gis-tools/create-esri-react-app.git"
+  },
+  "keywords": [
+    "ESRI",
+    "React",
+    "ReactJS",
+    "ESRI",
+    "loader"
+  ],
+  "author": "Bojan Zivkovic",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gis-tools/create-esri-react-app/issues"
+  },
+  "homepage": "https://github.com/gis-tools/create-esri-react-app#readme",
+  "dependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-latest": "^6.24.1",
+    "np": "^2.16.0"
+  }
+}
