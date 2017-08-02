@@ -24,7 +24,7 @@
     "ESRI",
     "React",
     "ReactJS",
-    "ESRI",
+    "esri-loader",
     "loader"
   ],
   "author": "Bojan Zivkovic",
@@ -36,6 +36,7 @@
   "dependencies": {
     "babel-cli": "^6.24.1",
     "babel-preset-latest": "^6.24.1",
+    "commander": "^2.11.0",
     "np": "^2.16.0"
   }
 }

@@ -10,26 +10,23 @@ if (!esriLoader.isLoaded()) {
       createMap();
     }
   }, {
-    url: 'https://js.arcgis.com/3.21/'
+    url: 'https://js.arcgis.com/3.21/' // Here you can change API version
   });
 } else {
   createMap();
 }
 
 function createMap() {
-  esriLoader.dojoRequire(
-      [
-        'esri/map'
-      ],
-      (Map) => {
-        let map = new Map('mapNode', {
-          center: [-100, 30],
-          zoom: 3,
-          basemap: 'gray-vector'
-        });
-        window.map = map;
-
-      });
+  esriLoader.dojoRequire([
+    'esri/map'
+  ], (Map) => {
+    let map = new Map('mapNode', {
+      center: [-100, 30],
+      zoom: 3,
+      basemap: 'gray-vector'
+    });
+    window.map = map;
+  });
 }
 
 class App extends Component {
@@ -39,7 +36,7 @@ class App extends Component {
           <div className="App-header">
             <h1>Welcome to ESRI React App</h1>
           </div>
-          <div id="mapNode" />
+          <div id="mapNode"/>
         </div>
     );
   }
