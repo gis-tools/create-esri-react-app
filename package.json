@@ -9,6 +9,7 @@
   "scripts": {
     "build": "babel src -d build",
     "prepublish": "npm run build",
+    "publish": "npm publish",
     "release": "np"
   },
   "babel": {
@@ -21,12 +22,16 @@
     "url": "git+https://github.com/gis-tools/create-esri-react-app.git"
   },
   "keywords": [
+    "ArcGIS",
+    "ArcGIS JS",
+    "ArcGIS loader",
+    "dojo",
     "ESRI",
+    "loader",
+    "esri-loader",
     "React",
     "ReactJS",
-    "esri-loader",
-    "loader",
-    "dojo"
+    "React JS"
   ],
   "author": "Bojan Zivkovic",
   "license": "MIT",
