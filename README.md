@@ -19,14 +19,14 @@ $ yarn global add create-esri-react-app
 ### How to create new ESRI React App 
 To create ESRI React application run:
 ```
-$ create-esri-react-app app_name
+$ create-esri-react-app esri_app
 ```
 
-It will create a directory called `app_name` inside the current folder.<br>
+It will create a directory called `esri_app` inside the current folder.<br>
 Inside that directory, it will generate the initial project structure and install the transitive dependencies:
 
 ```
-app_name
+esri_app
 ├── README.md
 ├── node_modules
 ├── package.json
@@ -43,6 +43,14 @@ app_name
     └── index.js
     └── logo.svg
     └── registerServiceWorker.js
+```
+
+### Choosing ESRI ArcGIS JS api version
+You can specify version of ESRI ArcGIS JS api during creation process. If you don't specify ESRI ArcGIS JS api version default version will be v4.
+```
+$ create-esri-react-app esri_app_v4
+- or -
+$ create-esri-react-app esri_app_v3 -v 3
 ```
 
 ### Information's related to Create React App
