@@ -1,6 +1,9 @@
+@import "https://js.arcgis.com/4.5/esri/css/main.css";
+
 html, body, #root, .App {
   height: 100%;
-  font: menu;
+  width: 100%;
+  background-color: #cfcfd4;
 }
 
 .App {
@@ -20,6 +23,6 @@ h1 {
 }
 
 /* Map view */
-#mapNode {
+#mapContainer {
   height: calc(100% - 80px);
 }
