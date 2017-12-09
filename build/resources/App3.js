@@ -1,46 +1,35 @@
 import React, {Component} from 'react';
+import esriLoader from 'esri-loader';
 import './App.css';
-import * as esriLoader from 'esri-loader';
 
-class App extends Component {
+const options = {
+  url: `https://js.arcgis.com/3.22/`
+};
+
+export default class App extends Component {
   constructor() {
     super();
 
-    if (!esriLoader.isLoaded()) {
-      esriLoader.bootstrap((err) => {
-        if (err) {
-          console.error(err);
-        } else {
-          this.createMap();
-        }
-      }, {
-        url: 'https://js.arcgis.com/3.22/' // Here you can change API version
-      });
-    } else {
-      this.createMap();
-    }
-
-    this.state = {
-      map: null
-    }
-  }
-
-  createMap = () => {
-    esriLoader.dojoRequire([
+    esriLoader.loadModules([
       'esri/map'
-    ], (Map) => {
-      let map = new Map('mapContainer', {
-        center: [-100, 30],
-        zoom: 3,
-        basemap: 'gray-vector'
-      });
-      window.map = map;
+    ], options)
+        .then(([Map]) => {
+          let map = new Map('mapContainer', {
+            basemap: 'gray-vector',
+            center: [-100, 30],
+            zoom: 3
+          });
 
-      this.setState({
-        map
-      })
-    });
-  };
+          window.map = map;
+
+          this.setState({
+            map
+          })
+        })
+        .catch(err => {
+          console.error(err);
+        });
+  }
 
   render() {
     return (
@@ -53,5 +42,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;

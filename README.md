@@ -4,7 +4,7 @@ Goal of Create ESRI React App is to connect ESRI and React application with mini
 A prerequisite for this application is Create React App already installed in your development environment. If Create React App is not installed on your system run: 
 
 ```
-npm install -g create-react-app
+npm install create-react-app -g
 ```  
 
 
@@ -50,7 +50,7 @@ You can specify version of ESRI ArcGIS JS api during creation process. If you do
 ```
 $ create-esri-react-app esri_app_v4
 - or -
-$ create-esri-react-app esri_app_v3 -v 3
+$ create-esri-react-app esri_app_v3 -a 3
 ```
 
 ### Information's related to Create React App

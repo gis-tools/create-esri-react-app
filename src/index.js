@@ -6,17 +6,19 @@ var fs = require('fs');
 var path = require('path');
 var program = require('commander');
 
-var bootstrapAppJs3 = __dirname + '/resources/App3.js';
-var bootstrapAppJs4 = __dirname + '/resources/App4.js';
-var bootstrapAppHtml3 = __dirname + '/resources/index-api-3.html';
-var bootstrapAppHtml4 = __dirname + '/resources/index-api-4.html';
-var bootstrapAppCss3 = __dirname + '/resources/App3.css';
-var bootstrapAppCss4 = __dirname + '/resources/App4.css';
 var colorGreen = '\x1b[32m';
 var colorReset = '\x1b[0m';
+
+var bootstrapAppJs3 = __dirname + '/resources/App3.js';
+var bootstrapAppCss3 = __dirname + '/resources/App3.css';
+
+var bootstrapAppJs4 = __dirname + '/resources/App4.js';
+var bootstrapAppCss4 = __dirname + '/resources/App4.css';
+
+var bootstrapAppHtml = __dirname + '/resources/index.html';
+
 var currentWorkingDirectory = path.resolve('./');
 var bootstrapAppJs;
-var bootstrapAppHtml;
 var bootstrapAppCss;
 
 program
@@ -29,11 +31,9 @@ var appName = program.args[0];
 
 if (program.api === '3') {
   bootstrapAppJs = bootstrapAppJs3;
-  bootstrapAppHtml = bootstrapAppHtml3;
   bootstrapAppCss = bootstrapAppCss3;
 } else {
   bootstrapAppJs = bootstrapAppJs4;
-  bootstrapAppHtml = bootstrapAppHtml4;
   bootstrapAppCss = bootstrapAppCss4;
 }
 
@@ -98,7 +98,7 @@ if (process.argv.length <= 2) {
   console.log('    - ESRI api v%s', program.api);
   var createEsriApp = 'create-react-app ' + appName;
   exec(createEsriApp, function (error, stdout, stderr) {
-    var addModule = 'cd ' + appName + ' && npm install esri-loader';
+    var addModule = 'cd ' + appName + ' && npm install esri-loader --save';
     exec(addModule, function (error, stdout, stderr) {
       console.log('');
       console.log('Success! ESRI React App ' + colorGreen + appName + colorReset + ' is created at ' + colorGreen + currentWorkingDirectory + colorReset + ' ');
