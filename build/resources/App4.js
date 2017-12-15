@@ -3,7 +3,7 @@ import esriLoader from 'esri-loader';
 import './App.css';
 
 const options = {
-  url: 'https://js.arcgis.com/4.5'
+  url: 'https://js.arcgis.com/4.6'
 };
 
 export default class App extends Component {
