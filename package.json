@@ -1,6 +1,6 @@
 {
   "name": "create-esri-react-app",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Creating ESRI applications with React included",
   "main": "./src/index.js",
   "bin": {
