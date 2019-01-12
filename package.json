@@ -10,7 +10,6 @@
     "build": "babel src -d build",
     "prepublish": "npm run build",
     "publish": "npm publish",
-    "preinstall": "npm run build",
     "release": "np"
   },
   "babel": {
