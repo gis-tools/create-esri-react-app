@@ -113,10 +113,10 @@ if (process.argv.length <= 2) {
    * Create react App
    */
   console.log('Creating a new ESRI React App in ' + colorGreen + currentWorkingDirectory + '/' + appName + colorReset + '.');
-  console.log('    - ESRI api v%s !!!!', program.api);
+  console.log('    - ESRI api v%s', program.api);
   var createEsriApp = 'npx create-react-app ' + appName;
   exec(createEsriApp, function(error, stdout, stderr) {
-    var addModule = 'cd ' + appName + ' && npm install esri-loader';
+    var addModule = 'cd ' + appName + ' && npm install esri-loader --save';
     exec(addModule, function(error, stdout, stderr) {
       console.log('');
       console.log('Success! ESRI React App ' + colorGreen + appName + colorReset + ' is created at ' + colorGreen + currentWorkingDirectory + colorReset + ' ');
