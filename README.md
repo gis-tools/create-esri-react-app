@@ -1,14 +1,14 @@
 ### Create ESRI React App
 
 Goal of Create ESRI React App is to connect ESRI and React application with minimal effort by using **[create-react-app](https://github.com/facebookincubator/create-react-app)** to create react application and **[esri-loader](https://github.com/Esri/esri-loader)** to add the ArcGIS JS API to React app.
-A prerequisite for this application is Create React App already installed in your development environment. If Create React App is not installed on your system run: 
+A prerequisite for this application is Create React App already installed in your development environment. If Create React App is not installed on your system run:
 
 ```
 npm install create-react-app -g
-```  
+```
 
 
-### How to install Create ESRI React App 
+### How to install Create ESRI React App
 To install Create ESRI React App application run:
 ```
 $ npm install create-esri-react-app -g
@@ -16,7 +16,7 @@ $ npm install create-esri-react-app -g
 $ yarn global add create-esri-react-app
 ```
 
-### How to create new ESRI React App 
+### How to create new ESRI React App
 To create ESRI React application run:
 ```
 $ create-esri-react-app esri_app
