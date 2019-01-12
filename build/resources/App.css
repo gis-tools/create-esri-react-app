@@ -1,28 +1,23 @@
-@import "https://js.arcgis.com/3.23/esri/css/esri.css";
-
 html, body, #root, .App {
   height: 100%;
   width: 100%;
   background-color: #cfcfd4;
 }
 
-.App {
-  text-align: center;
-}
-
 .App-header {
+  text-align: center;
   background-color: #222;
-  height: 80px;
-  padding: 20px;
-  color: white;
+  height: 50px;
+  line-height: 50px;
+  color: orange;
   box-sizing: border-box;
 }
 
 h1 {
-  margin: 0.25em;
+  margin: 0;
 }
 
 /* Map view */
 #mapContainer {
-  height: calc(100% - 80px);
+  height: calc(100% - 50px);
 }

@@ -9,36 +9,36 @@ var program = require('commander');
 var colorGreen = '\x1b[32m';
 var colorReset = '\x1b[0m';
 
+var bootstrapAppCss = __dirname + '/resources/App.css';
 var bootstrapAppJs3 = __dirname + '/resources/App3.js';
-var bootstrapAppCss3 = __dirname + '/resources/App3.css';
-
+var bootstrapAppConfig3 = __dirname + '/resources/config3.js';
 var bootstrapAppJs4 = __dirname + '/resources/App4.js';
-var bootstrapAppCss4 = __dirname + '/resources/App4.css';
+var bootstrapAppConfig4 = __dirname + '/resources/config4.js';
 
 var bootstrapAppHtml = __dirname + '/resources/index.html';
 
 var currentWorkingDirectory = path.resolve('./');
 var bootstrapAppJs;
-var bootstrapAppCss;
+var bootstrapAppConfig;
 
 program
-    .version('0.1.0')
-    .option('-a, --api [number]', 'Add API version ' + colorGreen + '-v 3' + colorReset + ' or ' + colorGreen + '-v 4' + colorReset + '. Default version of ESRI API is v4', 4)
-    .parse(process.argv);
+  .version('1.0.0')
+  .option('-a, --api [number]', 'Add API version ' + colorGreen + '-v 3' + colorReset + ' or ' + colorGreen + '-v 4' + colorReset + '. Default version of ESRI API is v4', 4)
+  .parse(process.argv);
 
 // Input app name from command line
 var appName = program.args[0];
 
 if (program.api === '3') {
   bootstrapAppJs = bootstrapAppJs3;
-  bootstrapAppCss = bootstrapAppCss3;
+  bootstrapAppConfig = bootstrapAppConfig3;
 } else {
   bootstrapAppJs = bootstrapAppJs4;
-  bootstrapAppCss = bootstrapAppCss4;
+  bootstrapAppConfig = bootstrapAppConfig4;
 }
 
 if (process.argv.length <= 2) {
-  console.log('Run' + colorGreen + ' create-esri-react-app app_name' + colorReset);
+  console.log('Run ___ ' + colorGreen + ' create-esri-react-app app_name' + colorReset);
 } else {
   /**
    *  Move to App.js
@@ -48,10 +48,10 @@ if (process.argv.length <= 2) {
     var destination = fs.createWriteStream('./' + appName + '/src/App.js');
 
     source.pipe(destination);
-    source.on('end', function () {
+    source.on('end', function() {
       /* copied */
     });
-    source.on('error', function (err) {
+    source.on('error', function(err) {
       /* error */
     });
   };
@@ -64,10 +64,10 @@ if (process.argv.length <= 2) {
     var dest = fs.createWriteStream('./' + appName + '/src/App.css');
 
     source.pipe(dest);
-    source.on('end', function () {
+    source.on('end', function() {
       /* copied */
     });
-    source.on('error', function (err) {
+    source.on('error', function(err) {
       /* error */
     });
   };
@@ -80,10 +80,26 @@ if (process.argv.length <= 2) {
     var dest = fs.createWriteStream('./' + appName + '/public/index.html');
 
     source.pipe(dest);
-    source.on('end', function () {
+    source.on('end', function() {
       /* copied */
     });
-    source.on('error', function (err) {
+    source.on('error', function(err) {
+      /* error */
+    });
+  };
+
+  /**
+   *  Move config.js file
+   */
+  var moveAppConfig = function moveAppHTML(bootstrapFile, appName) {
+    var source = fs.createReadStream(bootstrapFile);
+    var dest = fs.createWriteStream('./' + appName + '/src/config.js');
+
+    source.pipe(dest);
+    source.on('end', function() {
+      /* copied */
+    });
+    source.on('error', function(err) {
       /* error */
     });
   };
@@ -93,13 +109,15 @@ if (process.argv.length <= 2) {
    */
   var exec = require('child_process').exec;
 
-  // Create react App
+  /**
+   * Create react App
+   */
   console.log('Creating a new ESRI React App in ' + colorGreen + currentWorkingDirectory + '/' + appName + colorReset + '.');
   console.log('    - ESRI api v%s', program.api);
-  var createEsriApp = 'create-react-app ' + appName;
-  exec(createEsriApp, function (error, stdout, stderr) {
+  var createEsriApp = 'npx create-react-app ' + appName;
+  exec(createEsriApp, function(error, stdout, stderr) {
     var addModule = 'cd ' + appName + ' && npm install esri-loader --save';
-    exec(addModule, function (error, stdout, stderr) {
+    exec(addModule, function(error, stdout, stderr) {
       console.log('');
       console.log('Success! ESRI React App ' + colorGreen + appName + colorReset + ' is created at ' + colorGreen + currentWorkingDirectory + colorReset + ' ');
       console.log('Inside that directory, you can run several commands:');
@@ -111,6 +129,7 @@ if (process.argv.length <= 2) {
       moveAppJS(bootstrapAppJs, appName);
       moveAppHTML(bootstrapAppHtml, appName);
       moveAppCSS(bootstrapAppCss, appName);
+      moveAppConfig(bootstrapAppConfig, appName);
     });
   });
 }
