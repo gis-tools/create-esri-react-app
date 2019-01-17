@@ -38,7 +38,7 @@ if (program.api === '3') {
 }
 
 if (process.argv.length <= 2) {
-  console.log('Run ___ ' + colorGreen + ' create-esri-react-app app_name' + colorReset);
+  console.log('Run ' + colorGreen + ' create-esri-react-app [app_name]' + colorReset + 'to bootstrap your ESRI React App.');
 } else {
   /**
    *  Move to App.js
@@ -110,10 +110,10 @@ if (process.argv.length <= 2) {
   var exec = require('child_process').exec;
 
   /**
-   * Create react App
+   * Create ESRI React App
    */
   console.log('Creating a new ESRI React App in ' + colorGreen + currentWorkingDirectory + '/' + appName + colorReset + '.');
-  console.log('    - ESRI api v%s', program.api);
+  console.log(`    - ESRI api v${program.api}`);
   var createEsriApp = 'npx create-react-app ' + appName;
   exec(createEsriApp, function(error, stdout, stderr) {
     var addModule = 'cd ' + appName + ' && npm install esri-loader --save';
