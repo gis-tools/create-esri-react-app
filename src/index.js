@@ -114,6 +114,7 @@ if (process.argv.length <= 2) {
    */
   console.log('Creating a new ESRI React App in ' + colorGreen + currentWorkingDirectory + '/' + appName + colorReset + '.');
   console.log(`    - ESRI api v${program.api}`);
+  var reactLogo = './' + appName + '/src/logo.svg';
   var createEsriApp = 'npx create-react-app ' + appName;
   exec(createEsriApp, function(error, stdout, stderr) {
     var addModule = 'cd ' + appName + ' && npm install esri-loader --save';
@@ -130,6 +131,7 @@ if (process.argv.length <= 2) {
       moveAppHTML(bootstrapAppHtml, appName);
       moveAppCSS(bootstrapAppCss, appName);
       moveAppConfig(bootstrapAppConfig, appName);
+      fs.unlinkSync(reactLogo);
     });
   });
 }
