@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {loadModules, loadCss} from 'esri-loader';
-import { esriCSS, esriOptions } from "./config";
+import {loadCss, loadModules} from 'esri-loader';
+import {esriCSS, esriOptions} from './config';
 import './App.css';
 
 loadCss(esriCSS);
