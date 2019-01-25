@@ -1,0 +1,31 @@
+html,
+body {
+  position: fixed;
+  overflow: hidden; }
+
+html, body, #root, .App {
+  overflow: hidden;
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  background-color: #cfcfd4; }
+
+.App-header {
+  text-align: center;
+  background-color: #222;
+  height: 50px;
+  line-height: 50px;
+  color: orange;
+  box-sizing: border-box; }
+
+h1 {
+  margin: 0; }
+
+/* Map view */
+#mapContainer {
+  height: calc(100% - 50px); }
+
+/*# sourceMappingURL=App.css.map */

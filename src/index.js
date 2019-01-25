@@ -2,32 +2,32 @@
 
 'use strict';
 
-var fs = require('fs');
-var path = require('path');
-var program = require('commander');
+const fs = require('fs');
+const path = require('path');
+const program = require('commander');
 
-var colorGreen = '\x1b[32m';
-var colorReset = '\x1b[0m';
+const COLOR_GREEN = '\x1b[32m';
+const COLOR_RESET = '\x1b[0m';
+const CWD = path.resolve('.');
 
-var bootstrapAppCss = __dirname + '/resources/App.css';
-var bootstrapAppJs3 = __dirname + '/resources/App3.js';
-var bootstrapAppConfig3 = __dirname + '/resources/config3.js';
-var bootstrapAppJs4 = __dirname + '/resources/App4.js';
-var bootstrapAppConfig4 = __dirname + '/resources/config4.js';
-
-var bootstrapAppHtml = __dirname + '/resources/index.html';
-
-var currentWorkingDirectory = path.resolve('./');
 var bootstrapAppJs;
 var bootstrapAppConfig;
 
 program
   .version('1.0.0')
-  .option('-a, --api [number]', 'Add API version ' + colorGreen + '-v 3' + colorReset + ' or ' + colorGreen + '-v 4' + colorReset + '. Default version of ESRI API is v4', 4)
+  .option('-a, --api [number]', 'Add API version ' + COLOR_GREEN + '-v 3' + COLOR_RESET + ' or ' + COLOR_GREEN + '-v 4' + COLOR_RESET + '. Default version of ESRI API is v4', 4)
   .parse(process.argv);
 
 // Input app name from command line
-var appName = program.args[0];
+const appName = program.args[0];
+
+const templatesFolder = 'templates';
+const bootstrapAppCss = `${__dirname}/${templatesFolder}/App.css`;
+const bootstrapAppJs3 = `${__dirname}/${templatesFolder}/v3/App.js`;
+const bootstrapAppConfig3 = `${__dirname}/${templatesFolder}/v3/config.js`;
+const bootstrapAppJs4 = `${__dirname}/${templatesFolder}/v4/App.js`;
+const bootstrapAppConfig4 = `${__dirname}/${templatesFolder}/v4/config.js`;
+const bootstrapAppHtml = `${__dirname}/${templatesFolder}/index.html`;
 
 if (program.api === '3') {
   bootstrapAppJs = bootstrapAppJs3;
@@ -38,18 +38,18 @@ if (program.api === '3') {
 }
 
 if (process.argv.length <= 2) {
-  console.log('Run ' + colorGreen + ' create-esri-react-app [app_name]' + colorReset + 'to bootstrap your ESRI React App.');
+  console.log(`Run ${COLOR_GREEN}create-esri-react-app [app_name]${COLOR_RESET} to bootstrap your ESRI React App.`);
 } else {
   /**
    *  Move to App.js
    */
   var moveAppJS = function moveAppJS(bootstrapFile, appName) {
     var source = fs.createReadStream(bootstrapFile);
-    var destination = fs.createWriteStream('./' + appName + '/src/App.js');
+    var destination = fs.createWriteStream(`./${appName}/src/App.js`);
 
     source.pipe(destination);
     source.on('end', function() {
-      /* copied */
+      /* end */
     });
     source.on('error', function(err) {
       /* error */
@@ -61,11 +61,11 @@ if (process.argv.length <= 2) {
    */
   var moveAppCSS = function moveAppCSS(bootstrapFile, appName) {
     var source = fs.createReadStream(bootstrapFile);
-    var dest = fs.createWriteStream('./' + appName + '/src/App.css');
+    var dest = fs.createWriteStream(`./${appName}/src/App.css`);
 
     source.pipe(dest);
     source.on('end', function() {
-      /* copied */
+      /* end */
     });
     source.on('error', function(err) {
       /* error */
@@ -77,11 +77,11 @@ if (process.argv.length <= 2) {
    */
   var moveAppHTML = function moveAppHTML(bootstrapFile, appName) {
     var source = fs.createReadStream(bootstrapFile);
-    var dest = fs.createWriteStream('./' + appName + '/public/index.html');
+    var dest = fs.createWriteStream(`./${appName}/public/index.html`);
 
     source.pipe(dest);
     source.on('end', function() {
-      /* copied */
+      /* end */
     });
     source.on('error', function(err) {
       /* error */
@@ -91,13 +91,13 @@ if (process.argv.length <= 2) {
   /**
    *  Move config.js file
    */
-  var moveAppConfig = function moveAppHTML(bootstrapFile, appName) {
+  var moveAppCONFIG = function moveAppHTML(bootstrapFile, appName) {
     var source = fs.createReadStream(bootstrapFile);
-    var dest = fs.createWriteStream('./' + appName + '/src/config.js');
+    var dest = fs.createWriteStream(`./${appName}/src/config.js`);
 
     source.pipe(dest);
     source.on('end', function() {
-      /* copied */
+      /* end */
     });
     source.on('error', function(err) {
       /* error */
@@ -112,25 +112,26 @@ if (process.argv.length <= 2) {
   /**
    * Create ESRI React App
    */
-  console.log('Creating a new ESRI React App in ' + colorGreen + currentWorkingDirectory + '/' + appName + colorReset + '.');
+
+  console.log(`Creating a new ESRI React App in ${COLOR_GREEN}${CWD}/${appName}${COLOR_RESET}.`);
   console.log(`    - ESRI api v${program.api}`);
-  var reactLogo = './' + appName + '/src/logo.svg';
-  var createEsriApp = 'npx create-react-app ' + appName;
+  var reactLogo = `./${appName}/src/logo.svg`;
+  var createEsriApp = `npx create-react-app ${appName}`;
   exec(createEsriApp, function(error, stdout, stderr) {
-    var addModule = 'cd ' + appName + ' && npm install esri-loader --save';
+    var addModule = `cd ${appName} && npm install esri-loader --save`;
     exec(addModule, function(error, stdout, stderr) {
       console.log('');
-      console.log('Success! ESRI React App ' + colorGreen + appName + colorReset + ' is created at ' + colorGreen + currentWorkingDirectory + colorReset + ' ');
+      console.log(`Success! ESRI React App ${COLOR_GREEN}${appName}${COLOR_RESET} is created at ${COLOR_GREEN}${CWD}${COLOR_RESET}`);
       console.log('Inside that directory, you can run several commands:');
       console.log('');
       console.log('We suggest that you begin by typing:');
       console.log('');
-      console.log('    ' + colorGreen + 'cd' + colorReset + ' ' + appName);
-      console.log('    ' + colorGreen + 'npm start' + colorReset + ' or ' + colorGreen + 'yarn start' + colorReset);
+      console.log(`    ${COLOR_GREEN} cd ${COLOR_RESET} ${appName}`);
+      console.log(`    ${COLOR_GREEN} npm start ${COLOR_RESET} or ${COLOR_GREEN} yarn start${COLOR_RESET}`);
       moveAppJS(bootstrapAppJs, appName);
-      moveAppHTML(bootstrapAppHtml, appName);
       moveAppCSS(bootstrapAppCss, appName);
-      moveAppConfig(bootstrapAppConfig, appName);
+      moveAppHTML(bootstrapAppHtml, appName);
+      moveAppCONFIG(bootstrapAppConfig, appName);
       fs.unlinkSync(reactLogo);
     });
   });
