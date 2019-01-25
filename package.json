@@ -14,7 +14,7 @@
   },
   "babel": {
     "presets": [
-      "latest"
+      "@babel/preset-env"
     ]
   },
   "repository": {
@@ -43,8 +43,9 @@
     "commander": "^2.19.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-latest": "^6.24.1",
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
     "np": "^2.20.1"
   }
 }

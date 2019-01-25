@@ -43,7 +43,7 @@ if (process.argv.length <= 2) {
   /**
    *  Move to App.js
    */
-  var moveAppJS = function moveAppJS(bootstrapFile, appName) {
+  var moveAppJS = (bootstrapFile, appName) => {
     var source = fs.createReadStream(bootstrapFile);
     var destination = fs.createWriteStream(`./${appName}/src/App.js`);
 
@@ -59,7 +59,7 @@ if (process.argv.length <= 2) {
   /**
    *  Move to App.css
    */
-  var moveAppCSS = function moveAppCSS(bootstrapFile, appName) {
+  var moveAppCSS = (bootstrapFile, appName) => {
     var source = fs.createReadStream(bootstrapFile);
     var dest = fs.createWriteStream(`./${appName}/src/App.css`);
 
@@ -75,7 +75,7 @@ if (process.argv.length <= 2) {
   /**
    *  Move index.html file
    */
-  var moveAppHTML = function moveAppHTML(bootstrapFile, appName) {
+  var moveAppHTML = (bootstrapFile, appName) => {
     var source = fs.createReadStream(bootstrapFile);
     var dest = fs.createWriteStream(`./${appName}/public/index.html`);
 
@@ -91,7 +91,7 @@ if (process.argv.length <= 2) {
   /**
    *  Move config.js file
    */
-  var moveAppCONFIG = function moveAppHTML(bootstrapFile, appName) {
+  var moveAppCONFIG = (bootstrapFile, appName) => {
     var source = fs.createReadStream(bootstrapFile);
     var dest = fs.createWriteStream(`./${appName}/src/config.js`);
 
