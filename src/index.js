@@ -4,48 +4,53 @@
 
 const fs = require('fs');
 const path = require('path');
+const exec = require('child_process').exec; // Execute CLI commands
 const program = require('commander');
 
 const COLOR_GREEN = '\x1b[32m';
 const COLOR_RESET = '\x1b[0m';
 const CWD = path.resolve('.');
 
-var bootstrapAppJs;
-var bootstrapAppConfig;
+var templateJS;
+var templateCONFIG;
 
 program
   .version('1.0.0')
-  .option('-a, --api [number]', 'Add API version ' + COLOR_GREEN + '-v 3' + COLOR_RESET + ' or ' + COLOR_GREEN + '-v 4' + COLOR_RESET + '. Default version of ESRI API is v4', 4)
+  .option('-a, --api [number]', `Add API version ${COLOR_GREEN}-a 3${COLOR_RESET} or ${COLOR_GREEN}-a 4${COLOR_RESET}. Default version of ESRI API is v4`, 4)
   .parse(process.argv);
 
 // Input app name from command line
 const appName = program.args[0];
 
 const templatesFolder = 'templates';
-const bootstrapAppCss = `${__dirname}/${templatesFolder}/App.css`;
-const bootstrapAppJs3 = `${__dirname}/${templatesFolder}/v3/App.js`;
-const bootstrapAppConfig3 = `${__dirname}/${templatesFolder}/v3/config.js`;
-const bootstrapAppJs4 = `${__dirname}/${templatesFolder}/v4/App.js`;
-const bootstrapAppConfig4 = `${__dirname}/${templatesFolder}/v4/config.js`;
-const bootstrapAppHtml = `${__dirname}/${templatesFolder}/index.html`;
+const templateJs3 = path.join(__dirname, templatesFolder, './v3/App.js');
+const templateConfig3 = path.join(__dirname, templatesFolder, './v3/config.js');
+const templateJs4 = path.join(__dirname, templatesFolder, './v4/App.js');
+const templateConfig4 = path.join(__dirname, templatesFolder, './v4/config.js');
+const templateCSS = path.join(__dirname, templatesFolder, 'App.css');
+const templateHTML = path.join(__dirname, templatesFolder, 'index.html');
 
 if (program.api === '3') {
-  bootstrapAppJs = bootstrapAppJs3;
-  bootstrapAppConfig = bootstrapAppConfig3;
+  templateJS = templateJs3;
+  templateCONFIG = templateConfig3;
 } else {
-  bootstrapAppJs = bootstrapAppJs4;
-  bootstrapAppConfig = bootstrapAppConfig4;
+  templateJS = templateJs4;
+  templateCONFIG = templateConfig4;
 }
 
 if (process.argv.length <= 2) {
   console.log(`Run ${COLOR_GREEN}create-esri-react-app [app_name]${COLOR_RESET} to bootstrap your ESRI React App.`);
 } else {
+
   /**
-   *  Move to App.js
+   * Move Template file
+   * @param templateFile
+   * @param appName
+   * @param configLocation
    */
-  var moveAppJS = (bootstrapFile, appName) => {
-    var source = fs.createReadStream(bootstrapFile);
-    var destination = fs.createWriteStream(`./${appName}/src/App.js`);
+  var moveTemplateFile = (appName, templateFile, configLocation) => {
+    var source = fs.createReadStream(templateFile);
+    var destination = fs.createWriteStream(`./${appName}/${configLocation}`);
 
     source.pipe(destination);
     source.on('end', function() {
@@ -57,63 +62,9 @@ if (process.argv.length <= 2) {
   };
 
   /**
-   *  Move to App.css
-   */
-  var moveAppCSS = (bootstrapFile, appName) => {
-    var source = fs.createReadStream(bootstrapFile);
-    var dest = fs.createWriteStream(`./${appName}/src/App.css`);
-
-    source.pipe(dest);
-    source.on('end', function() {
-      /* end */
-    });
-    source.on('error', function(err) {
-      /* error */
-    });
-  };
-
-  /**
-   *  Move index.html file
-   */
-  var moveAppHTML = (bootstrapFile, appName) => {
-    var source = fs.createReadStream(bootstrapFile);
-    var dest = fs.createWriteStream(`./${appName}/public/index.html`);
-
-    source.pipe(dest);
-    source.on('end', function() {
-      /* end */
-    });
-    source.on('error', function(err) {
-      /* error */
-    });
-  };
-
-  /**
-   *  Move config.js file
-   */
-  var moveAppCONFIG = (bootstrapFile, appName) => {
-    var source = fs.createReadStream(bootstrapFile);
-    var dest = fs.createWriteStream(`./${appName}/src/config.js`);
-
-    source.pipe(dest);
-    source.on('end', function() {
-      /* end */
-    });
-    source.on('error', function(err) {
-      /* error */
-    });
-  };
-
-  /**
-   * Execute CLI commands
-   */
-  var exec = require('child_process').exec;
-
-  /**
    * Create ESRI React App
    */
-
-  console.log(`Creating a new ESRI React App in ${COLOR_GREEN}${CWD}/${appName}${COLOR_RESET}.`);
+  console.log(`Creating a new ESRI React App ${CWD}/${appName}${COLOR_RESET} in folder ${COLOR_GREEN}${CWD}/${appName}${COLOR_RESET}.`);
   console.log(`    - ESRI api v${program.api}`);
   var reactLogo = `./${appName}/src/logo.svg`;
   var createEsriApp = `npx create-react-app ${appName}`;
@@ -128,10 +79,13 @@ if (process.argv.length <= 2) {
       console.log('');
       console.log(`    ${COLOR_GREEN} cd ${COLOR_RESET} ${appName}`);
       console.log(`    ${COLOR_GREEN} npm start ${COLOR_RESET} or ${COLOR_GREEN} yarn start${COLOR_RESET}`);
-      moveAppJS(bootstrapAppJs, appName);
-      moveAppCSS(bootstrapAppCss, appName);
-      moveAppHTML(bootstrapAppHtml, appName);
-      moveAppCONFIG(bootstrapAppConfig, appName);
+
+      moveTemplateFile(appName, templateJS, 'src/App.js');
+      moveTemplateFile(appName, templateCSS, 'src/App.css');
+      moveTemplateFile(appName, templateHTML, 'public/index.html');
+      moveTemplateFile(appName, templateCONFIG, 'src/config.js');
+
+      // Remove reactLogo
       fs.unlinkSync(reactLogo);
     });
   });
