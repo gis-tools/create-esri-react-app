@@ -64,7 +64,7 @@ if (process.argv.length <= 2) {
   /**
    * Create ESRI React App
    */
-  console.log(`Creating a new ESRI React App ${CWD}/${appName}${COLOR_RESET} in folder ${COLOR_GREEN}${CWD}/${appName}${COLOR_RESET}.`);
+  console.log(`Creating a new ESRI React App in folder ${COLOR_GREEN}${CWD}/${appName}${COLOR_RESET}.`);
   console.log(`    - ESRI api v${program.api}`);
   var reactLogo = `./${appName}/src/logo.svg`;
   var createEsriApp = `npx create-react-app ${appName}`;

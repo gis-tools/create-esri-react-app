@@ -59,7 +59,7 @@ if (process.argv.length <= 2) {
    */
 
 
-  console.log("Creating a new ESRI React App ".concat(CWD, "/").concat(appName).concat(COLOR_RESET, " in folder ").concat(COLOR_GREEN).concat(CWD, "/").concat(appName).concat(COLOR_RESET, "."));
+  console.log("Creating a new ESRI React App in folder ".concat(COLOR_GREEN).concat(CWD, "/").concat(appName).concat(COLOR_RESET, "."));
   console.log("    - ESRI api v".concat(program.api));
   var reactLogo = "./".concat(appName, "/src/logo.svg");
   var createEsriApp = "npx create-react-app ".concat(appName);
